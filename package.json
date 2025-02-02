@@ -2,12 +2,11 @@
   "name": "task-manager",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://JasonRLH95.github.io/task_manager",
+  "homepage": "https://JasonRLH95.github.io/task_manager/",
   "dependencies": {
     "cra-template": "1.2.0",
     "dotenv": "^16.4.7",
     "firebase": "^11.1.0",
-    "gh-pages": "^6.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.1",
@@ -15,7 +14,7 @@
     "web-vitals": "^4.2.4"
   },
   "scripts": {
-    "deploy": "npm run build&&gh-pages -d build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -38,5 +37,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
