@@ -1,0 +1,59 @@
+.taskHistory_component{
+    min-width: 500px;
+    width: 70%;
+    min-height: 230px;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin: 0 auto 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(240,0,0,0.8);
+    color: white;
+}
+.taskHistory_component:hover{
+    box-shadow: 5px 5px 5px grey;
+    scale: 1.05;
+}
+.taskHistory_container{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    height: 230px;
+}
+.taskHistory_subject{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    text-shadow: 5px 5px 5px black;
+}
+.taskHistory_mainDetails{
+    width: 20%;
+    height: 150px;
+    padding: 40px 0;
+    border-right: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    text-shadow: 3px 3px 3px black;
+}
+.taskHistory_mainDetails_h4{
+    margin: 0;
+    font-weight: normal;
+}
+.taskHistory_description_dropDown{
+    min-height: 100px;
+    width: 80%;
+    padding: 0 10%;
+    border-top: 1px solid black;
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,9 @@
+body{
+  min-width: 720px;
+  overscroll-behavior: none;
+}
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}

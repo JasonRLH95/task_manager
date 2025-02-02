@@ -1,0 +1,9 @@
+.close_makeSure_popup{
+    width: 350px;
+    height: 250px;
+    border: 1px solid black;
+    z-index: 1000;
+    position: absolute;
+    left: calc(50vw - (350px /2));
+    background-color: white;
+}
