@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
 import '../style/taskHistory.css';
+import { absoluteErase } from '../firebase/connections';
 
-export default function Task({ task }) {
+export default function TaskHistory({ task, setFlag, flag }) {
 
   const [detailsFlag,setDetailsFlag] = useState(false);
     
-
+  const eraseTask=()=>{
+    absoluteErase(task)
+    .then(data =>{
+      if(data.msg === "ok"){
+        setFlag(!flag);
+      }
+    })
+    .catch(error=>{
+      console.error("Error erasing document:\n", error);
+    })
+  }
   return (
     <div className='taskHistory_component'>
         <div className='taskHistory_container'>
+          <div className="taskHistory_deleteBtn" onClick={()=>{eraseTask()}}></div>
           <div className='taskHistory_subject' onClick={()=>{setDetailsFlag(!detailsFlag)}}>
             {task.subject}
           </div>

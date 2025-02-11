@@ -3,7 +3,8 @@
 }
 .signin_header{
     font-family:"MyCustomFont", sans-serif;
-    font-size: 80px;
+    font-size: 90px;
+    letter-spacing: 5px;
 }
 .signin_container{
     width: 400px;
@@ -25,6 +26,9 @@
     margin: 10px auto 20px;
     font-size: 21px;
     text-indent: 10px;
+}
+#signin_password{
+    position: relative;
 }
 .signin_button{
     width: 100px;

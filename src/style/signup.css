@@ -4,7 +4,8 @@
 }
 .signup_header{
     font-family:"MyCustomFont", sans-serif;
-    font-size: 80px;
+    font-size: 90px;
+    letter-spacing: 5px;
 }
 .signup_container{
     width: 400px;

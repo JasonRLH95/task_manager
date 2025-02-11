@@ -1,5 +1,5 @@
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { getDocs,collection,addDoc, updateDoc, doc, orderBy, query, where} from "firebase/firestore";
+import { getDocs,collection,addDoc, updateDoc, doc, orderBy, query, where, deleteDoc} from "firebase/firestore";
 import { firestore } from "./firebase.js";
 
 const auth = getAuth();
@@ -115,9 +115,12 @@ export const createTask = async (task) => {
     }
     try {
         const docRef = await addDoc(collection(firestore,"tasks"), task);
+        console.log("doc: "+docRef);
+        console.log("doc id: "+docRef.id);
         return docRef.id;
     } catch (error) {
-        console.error("Error adding tasks to Firestore:", error);
+        // console.error("Error adding tasks to Firestore:", error);
+        console.error("Error adding task:", error.code, error.message);
         throw error;
     }
   };
@@ -203,7 +206,7 @@ export const deleteTask = async (task)=>{
 
 
 // ----------------------------------------------
-// Function to fetch closed tasks only
+// Function to fetch deleted tasks only
 // ----------------------------------------------
 export const getHistory= async (uid)=>{
     if (!uid) {
@@ -215,13 +218,30 @@ export const getHistory= async (uid)=>{
         const deletedRef = where("deleted","==",true);
         const q = query(docRef, userTasks, deletedRef);
         const querySnapshot = await getDocs(q);
-        const filtered = querySnapshot.docs.map((doc)=>{
-            return doc.data();
-        })
+        const filtered = querySnapshot.docs.map((doc)=>({
+            id: doc.id,
+            ...doc.data(),
+        }))
         return filtered;
     }
     catch(error){
         console.error("Error closing task:", error);
+        throw error;
+    }
+}
+
+export const absoluteErase = async(task)=>{
+    if (!task) {
+        throw new Error("Task is required to update a document.");
+    }
+    try{
+        console.log(task.id);
+        const res = await deleteDoc(doc(firestore,"tasks",task.id));
+        console.log("results:\n"+res);
+        return {msg:"ok"};
+    }
+    catch(error){
+        console.error("Error absErasing task:", error);
         throw error;
     }
 }

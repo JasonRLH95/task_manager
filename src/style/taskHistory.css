@@ -20,6 +20,21 @@
     width: 100%;
     height: 230px;
 }
+.taskHistory_deleteBtn{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background: url("../assets/deleteLogo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    z-index: 200;
+}
+.task_deleteBtn:hover{
+    filter:brightness(0);
+}
 .taskHistory_subject{
     width: 80%;
     height: 100%;

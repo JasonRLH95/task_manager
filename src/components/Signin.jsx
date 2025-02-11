@@ -6,6 +6,7 @@ export default function Signin({ setConncted, setSignUp, setTasks, setCurrentUse
     const [loginEmail,setLoginEmail] = useState("");
     const [loginPassword,setLoginPassword] = useState("");
 
+
     // --------------------------
     // search user on users DB and
     // return his tasks and uid
@@ -59,10 +60,10 @@ export default function Signin({ setConncted, setSignUp, setTasks, setCurrentUse
     <div className='signin_components'>
         <h1 className="signin_header">Task Manager</h1>
         <div className="signin_container">
-            <div className="signin_inputsDiv">
-                <input type="text" className="signin_input" placeholder='Email' onChange={(e)=>{setLoginEmail(e.target.value)}}/>
-                <input type="text" className="signin_input" placeholder='Password' onChange={(e)=>{setLoginPassword(e.target.value)}}/>
-            </div>
+            <form className="signin_inputsDiv">
+                <input type="email" className="signin_input"autoComplete='username' required placeholder='Email' onChange={(e)=>{setLoginEmail(e.target.value)}}/>
+                <input id='signin_password' type="password" className="signin_input" autoComplete='current-password' required placeholder='Password' onChange={(e)=>{setLoginPassword(e.target.value)}}/>
+            </form>
             <button className="signin_button" onClick={()=>{login()}}>Login</button>
         </div>
         <button className='signin_signupBtn' onClick={()=>{setSignUp(true)}}>sign up</button>

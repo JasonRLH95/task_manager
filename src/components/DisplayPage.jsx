@@ -38,11 +38,11 @@ export default function DisplayPage({ display, tasks, setTasks, currentUser }) {
             return <TaskForm currentUser={currentUser}/>
         }
         if(display === 2){
-            return <History loading={loading} setLoading={setLoading} flag ={fetchHistoryFlag} tasks={tasks} setTasks={setTasks} currentUser={currentUser}/>
+            return <History loading={loading} setLoading={setLoading} flag ={fetchHistoryFlag} setFlag={setFetchHistoryFlag} tasks={tasks} setTasks={setTasks} currentUser={currentUser}/>
         }
     }
 
   return (
-    <div style={{minHeight:"70vh"}}>{renderPage()}</div>
+    <div style={{minHeight:"90vh"}}>{renderPage()}</div>
   )
 }

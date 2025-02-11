@@ -63,11 +63,11 @@ export default function Signup({ setSignUp }) {
     <div className='signup_component'>
       <h1 className='signup_header'>Sign up</h1>
       <div className="signup_container">
-        <div className="signup_inputsDiv">
-          <input type="text" className="signup_input" placeholder='Email' onChange={(e)=>{setSignEmail(e.target.value)}}/>
-          <input type="text" className="signup_input" placeholder='Password' onChange={(e)=>{setSignPass(e.target.value)}}/>
-          <input type="text" className="signup_input" placeholder='Re-password' onChange={(e)=>{setSignRepass(e.target.value)}}/>
-        </div>
+        <form className="signup_inputsDiv">
+          <input type="email" className="signup_input" autoComplete='username' required placeholder='Email' onChange={(e)=>{setSignEmail(e.target.value)}}/>
+          <input type="password" className="signup_input" autoComplete='new-password' required placeholder='Password' onChange={(e)=>{setSignPass(e.target.value)}}/>
+          <input type="password" className="signup_input" autoComplete='new-password' required placeholder='Re-password' onChange={(e)=>{setSignRepass(e.target.value)}}/>
+        </form>
         <button className='signup_button' onClick={()=>{signupFetch()}}>Let's Go</button>
       </div>
       <button className='signup_signinBtn' onClick={()=>{setSignUp(false)}}>Sign in</button>
