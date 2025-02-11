@@ -1,31 +1,99 @@
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { getDocs,collection,addDoc, updateDoc, doc, orderBy, query, where} from "firebase/firestore";
 import { firestore } from "./firebase.js";
 
+const auth = getAuth();
 
+// ---------------------------------------------------------------------------------------------
+// users collection
+// ---------------------------------------------------------------------------------------------
+// ----------------------------------------------
+// Search on the sign in page the user that fits
+// the credentials inserted and return his uid
+// and his tasks
+// ----------------------------------------------
+export const findUser = async (email, password)=>{
+    if (!email || !password) {
+        throw new Error("User is required to search a document.");
+    }
+    try{
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const userRef = userCredential.user;
+        const id = userRef.uid;
+        const tasksQuery = query(collection(firestore, "tasks"), where("userID", "==", id));
+        const querySnapshot = await getDocs(tasksQuery);
+        const tasks = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const res = {
+            id,
+            tasks
+        }
+        return res;
+    }
+    catch (error) {
+        console.error("Error fetching tasks from Firestore:", error);
+        throw error;
+    }
+}
 
 // ----------------------------------------------
-// Function to fetch tasks according to filter requested by client
+// Adding new user to the users database when sign up
 // ----------------------------------------------
-export const getTasks = async (filter) => {
+export const addUser = async (email, password)=>{
+    if (!email || !password) {
+        throw new Error("Email and password is required to create a document.");
+    }
     try {
-        var data;
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const userRef = userCredential.user;
+        return userRef;
+    } catch (error) {
+        console.error("Error signing up:", error.message);
+        
+        if (error.code === "auth/email-already-in-use") {
+            alert("Email is already in use.");
+        } else if (error.code === "auth/weak-password") {
+            alert("Password should be at least 6 characters.");
+        } else {
+            alert("Sign-up failed. Try again.");
+        }
+
+        return null;
+    }
+}
+
+
+
+
+// ---------------------------------------------------------------------------------------------
+// tasks collection
+// ---------------------------------------------------------------------------------------------
+// ----------------------------------------------
+// Function to fetch tasks according to filter
+// requested by client
+// ----------------------------------------------
+export const getTasks = async (filter, uid) => {
+    if (!uid) {
+        throw new Error("User ID is required to update a document.");
+    }
+    try {
         var tasksQuery;
         const tasksRef = collection(firestore, "tasks");
         const deletedQuery = where("deleted","==",false);
+        const userTasks = where("userID", "==", uid);
         if(filter === "Closed"){
-            tasksQuery = query(tasksRef, deletedQuery, orderBy("task_status"));
+            tasksQuery = query(tasksRef, deletedQuery, userTasks, orderBy("task_status"));
         }
         else if(filter === "Open"){
-            tasksQuery = query(tasksRef, deletedQuery, orderBy("task_status","desc"));
+            tasksQuery = query(tasksRef, deletedQuery, userTasks, orderBy("task_status","desc"));
         }
         else if(filter === "Newer"){
-            tasksQuery = query(tasksRef, deletedQuery, orderBy("taskCreatedAt","desc"));
+            tasksQuery = query(tasksRef, deletedQuery, userTasks, orderBy("taskCreatedAt","desc"));
         }
         else if(filter === "Nearest Time"){
-            tasksQuery = query(tasksRef, deletedQuery, orderBy("task_exp_date"));
+            tasksQuery = query(tasksRef, deletedQuery, userTasks, orderBy("task_exp_date"));
         }
         const querySnapshot = await getDocs(tasksQuery);
-        data = querySnapshot.docs.map((doc) => ({
+        var data = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
         }));
@@ -38,7 +106,8 @@ export const getTasks = async (filter) => {
 
 
 // ----------------------------------------------
-// Function that get the new task object and adding it to the tasks collection
+// Function that get the new task object and
+// adding it to the tasks collection
 // ----------------------------------------------
 export const createTask = async (task) => {
     if (!task) {
@@ -46,7 +115,6 @@ export const createTask = async (task) => {
     }
     try {
         const docRef = await addDoc(collection(firestore,"tasks"), task);
-  
         return docRef.id;
     } catch (error) {
         console.error("Error adding tasks to Firestore:", error);
@@ -54,27 +122,32 @@ export const createTask = async (task) => {
     }
   };
 
-
-    export const updateTask = async (task, newTask) => {
-        if (!task) {
-            throw new Error("Task is required to create a document.");
-        }
-        try {
-            const docRef = doc(firestore,"tasks",task.id);
-            const taskUpdated = await updateDoc(docRef, newTask);
-            return taskUpdated;
-        } catch (error) {
-            console.error("Error adding tasks to Firestore:", error);
-            throw error;
-        }
-    };
+// ----------------------------------------------
+// Function that get the task selected and the
+// new information to be updated instead
+// ----------------------------------------------
+export const updateTask = async (task, newTask) => {
+    if (!task) {
+        throw new Error("Task is required to create a document.");
+    }
+    try {
+        const docRef = doc(firestore,"tasks",task.id);
+        const taskUpdated = await updateDoc(docRef, newTask);
+        return taskUpdated;
+    } catch (error) {
+        console.error("Error adding tasks to Firestore:", error);
+        throw error;
+    }
+};
 
 
 
 
 // ----------------------------------------------
-// Function that get the specific task which the client want to close, search  
-// that task from tasks collection and update the status and update-time of it
+// Function that get the specific task which the
+// client want to close, search that task from
+// tasks collection and update the status and
+// update-time of it
 // ----------------------------------------------
 export const closeTask = async (task)=>{
     if (!task) {
@@ -95,7 +168,9 @@ export const closeTask = async (task)=>{
 // Function to change the task urgency
 // ----------------------------------------------
 export const changeUrgency = async (task, _urgency)=>{
-
+    if (!task) {
+        throw new Error("Task is required to update a document.");
+    }
     try{
         const docRef = doc(firestore,"tasks",task.id);
         await updateDoc(docRef,{urgency:_urgency});
@@ -111,7 +186,9 @@ export const changeUrgency = async (task, _urgency)=>{
 // Function to delete task and send it to history
 // ----------------------------------------------
 export const deleteTask = async (task)=>{
-
+    if (!task) {
+        throw new Error("Task is required to update a document.");
+    }
     try{
         const docRef = doc(firestore,"tasks",task.id);
         await updateDoc(docRef,{deleted:true});
@@ -128,11 +205,15 @@ export const deleteTask = async (task)=>{
 // ----------------------------------------------
 // Function to fetch closed tasks only
 // ----------------------------------------------
-export const getHistory= async ()=>{
-    
+export const getHistory= async (uid)=>{
+    if (!uid) {
+        throw new Error("User ID is required to update a document.");
+    }
     try{
         const docRef = collection(firestore,"tasks");
-        const q = query(docRef, where("deleted","==",true));
+        const userTasks = where("userID", "==", uid);
+        const deletedRef = where("deleted","==",true);
+        const q = query(docRef, userTasks, deletedRef);
         const querySnapshot = await getDocs(q);
         const filtered = querySnapshot.docs.map((doc)=>{
             return doc.data();

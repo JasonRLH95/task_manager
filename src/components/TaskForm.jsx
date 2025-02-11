@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import '../style/taskForm.css';
 import { createTask } from '../firebase/connections.js';
 
-export default function TaskForm() {
+export default function TaskForm({ currentUser }) {
     const [subject,setSubject] = useState("");
     const [urgency,setUrgency] = useState("");
     const [task_owner,setTaskOwner] = useState("");
@@ -33,6 +33,7 @@ export default function TaskForm() {
             task_status:"open",
             taskCreatedAt: new Date(),
             taskUpdatedAt: new Date(),
+            userID:currentUser,
         }
         // -----------
         // make validations first before send to firestore

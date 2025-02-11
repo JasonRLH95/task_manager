@@ -1,0 +1,59 @@
+.signup_component{
+    min-height: 100vh;
+    overflow: hidden;
+}
+.signup_header{
+    font-family:"MyCustomFont", sans-serif;
+    font-size: 80px;
+}
+.signup_container{
+    width: 400px;
+    height: 300px;
+    border: 1px solid black;
+    padding: 50px 20px 20px;
+    margin: 50px auto 5px;
+}
+.signup_inputsDiv{
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    width: 80%;
+    height: 80%;
+}
+.signup_input{
+    width: 100%;
+    height: 50px;
+    margin: 10px auto 20px;
+    font-size: 21px;
+    text-indent: 10px;
+}
+.signup_button{
+    width: 100px;
+    height: 40px;
+    border: 1px solid black;
+    color: white;
+    text-shadow: 2px 2px 4px black;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: rgb(5, 207, 5);
+    cursor: pointer;
+}
+.signup_button:hover{
+    background-color: white;
+    border: 1px solid rgb(5, 207, 5);
+    color: rgb(5, 207, 5);
+    text-shadow: none;
+}
+.signup_signinBtn{
+    color: blue;
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    padding: none;
+}
+.signup_signinBtn:hover{
+    color: purple;
+}

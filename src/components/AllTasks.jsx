@@ -7,7 +7,7 @@ import Loading from './Loading';
 import PopupAtEdit from './PopupAtEdit';
 import PopupAtDelete from './PopupAtDelete';
 
-export default function AllTasks({ loading, setLoading, flag, setFlag, tasks, setTasks }) {
+export default function AllTasks({ loading, setLoading, flag, setFlag, tasks, setTasks, currentUser }) {
   
   const [selectedTask,setSelectedTask] = useState(null); // => catch the task index selected when change urgency || close || delete
   const [currentTask, setCurrentTask] = useState(null); // => catch the task selected for the edit, holds the current task information
@@ -31,7 +31,7 @@ export default function AllTasks({ loading, setLoading, flag, setFlag, tasks, se
         setLoading(true);
         try{
           setTimeout(() => {
-            getTasks(filter)
+            getTasks(filter, currentUser)
             .then((data)=>{
               setTasks(data);
               setLoading(false);

@@ -3,9 +3,9 @@ import TaskForm from './TaskForm';
 import AllTasks from "./AllTasks";
 import History from "./History";
 
-export default function DisplayPage({display}) {
+export default function DisplayPage({ display, tasks, setTasks, currentUser }) {
 
-    const [tasks,setTasks] = useState(null);
+    
     const [loading,setLoading] = useState(true);
 
     // ------------------------------------
@@ -32,17 +32,17 @@ export default function DisplayPage({display}) {
     // ------------------------------------
     const renderPage=()=>{
         if(display === 0){
-            return <AllTasks loading={loading} setLoading={setLoading} flag={fetchAllFlag} setFlag={setFetchAllFlag} tasks={tasks} setTasks={setTasks}/>
+            return <AllTasks loading={loading} setLoading={setLoading} flag={fetchAllFlag} setFlag={setFetchAllFlag} tasks={tasks} setTasks={setTasks} currentUser={currentUser}/>
         }
         if(display === 1){
-            return <TaskForm/>
+            return <TaskForm currentUser={currentUser}/>
         }
         if(display === 2){
-            return <History loading={loading} setLoading={setLoading} flag ={fetchHistoryFlag} tasks={tasks} setTasks={setTasks}/>
+            return <History loading={loading} setLoading={setLoading} flag ={fetchHistoryFlag} tasks={tasks} setTasks={setTasks} currentUser={currentUser}/>
         }
     }
 
   return (
-    <div>{renderPage()}</div>
+    <div style={{minHeight:"70vh"}}>{renderPage()}</div>
   )
 }

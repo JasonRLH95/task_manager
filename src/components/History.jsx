@@ -4,7 +4,7 @@ import TaskHistory from './TaskHistory';
 import { getHistory } from '../firebase/connections';
 import Loading from './Loading';
 
-export default function History({ loading, setLoading, flag, tasks, setTasks}) {
+export default function History({ loading, setLoading, flag, tasks, setTasks, currentUser }) {
 
   
   // --------------------------------------
@@ -17,7 +17,7 @@ export default function History({ loading, setLoading, flag, tasks, setTasks}) {
       setLoading(true);
       try{
         setTimeout(()=>{
-          getHistory()
+          getHistory(currentUser)
           .then((data)=>{
             setTasks(data);
             setLoading(false);
@@ -43,7 +43,7 @@ export default function History({ loading, setLoading, flag, tasks, setTasks}) {
     }
     else if(tasks !== null){
       return tasks.map((task, inx) =>{
-        return <TaskHistory task={task} tasks={tasks} inx={inx}/>
+        return <TaskHistory key={`historyTask_${inx}`} task={task} tasks={tasks} inx={inx}/>
       })
     }
   }

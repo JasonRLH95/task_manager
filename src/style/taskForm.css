@@ -4,8 +4,15 @@
     min-height: calc(100vh - 165px);
 }
 .taskForm_header{
-    margin: 0;
-    padding-top: 50px;
+    padding-top: 30px; 
+    height: 100%;
+    width: 100%;
+    font-size: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 5px 5px 5px grey;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 .taskForm_container{
     width: 60%;
