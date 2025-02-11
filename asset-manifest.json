@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/task_manager/static/css/main.4cafb9c8.css",
-    "main.js": "/task_manager/static/js/main.fc103bed.js",
+    "main.css": "/task_manager/static/css/main.2a38490e.css",
+    "main.js": "/task_manager/static/js/main.466e0ebd.js",
     "static/js/488.2f5d961e.chunk.js": "/task_manager/static/js/488.2f5d961e.chunk.js",
+    "static/media/AmartiSatraDemo-E4P3j.otf": "/task_manager/static/media/AmartiSatraDemo-E4P3j.fde05b45d89a9dd53d89.otf",
     "index.html": "/task_manager/index.html",
-    "main.4cafb9c8.css.map": "/task_manager/static/css/main.4cafb9c8.css.map",
-    "main.fc103bed.js.map": "/task_manager/static/js/main.fc103bed.js.map",
+    "main.2a38490e.css.map": "/task_manager/static/css/main.2a38490e.css.map",
+    "main.466e0ebd.js.map": "/task_manager/static/js/main.466e0ebd.js.map",
     "488.2f5d961e.chunk.js.map": "/task_manager/static/js/488.2f5d961e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4cafb9c8.css",
-    "static/js/main.fc103bed.js"
+    "static/css/main.2a38490e.css",
+    "static/js/main.466e0ebd.js"
   ]
 }
