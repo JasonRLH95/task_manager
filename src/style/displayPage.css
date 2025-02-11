@@ -1,0 +1,14 @@
+.displayPage_component{
+    min-height: 90vh;
+    width: 100%;
+}
+
+
+/* @media (max-width:450px) {
+    .displayPage_component{
+        margin: auto;
+        max-width: 450px;
+        width: 105vw;
+        min-width: 250px;
+    }
+} */

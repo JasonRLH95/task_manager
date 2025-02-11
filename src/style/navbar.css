@@ -9,3 +9,13 @@
     background-color: lightgrey;
     border-right: 1px solid black;
 }
+
+/* @media (max-width:450px) {
+  .navbar_container{
+    margin: auto;
+    max-width: 450px;
+    width: 105vw;
+    min-width: 250px;
+    height: 100px;
+  }
+} */

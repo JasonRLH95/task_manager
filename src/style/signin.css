@@ -60,3 +60,21 @@
 .signin_signupBtn:hover{
     color: purple;
 }
+
+/* @media (max-width:450px) {
+    .signin_header{
+        font-size: 80px;
+    }
+    .signin_container{
+        width: 250px;
+        border-radius: 20px;
+    }
+    .signin_inputsDiv{
+        justify-content: space-evenly;
+    }
+    .signin_input{
+        margin: 0;
+        border: 1px solid black;
+        font-size: 19px;
+    }
+} */

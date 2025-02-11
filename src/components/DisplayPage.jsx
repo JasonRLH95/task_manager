@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import "../style/displayPage.css";
 import TaskForm from './TaskForm';
 import AllTasks from "./AllTasks";
 import History from "./History";
@@ -43,6 +44,6 @@ export default function DisplayPage({ display, tasks, setTasks, currentUser }) {
     }
 
   return (
-    <div style={{minHeight:"90vh"}}>{renderPage()}</div>
+    <div className='displayPage_component' style={{minHeight:"90vh"}}>{renderPage()}</div>
   )
 }

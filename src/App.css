@@ -13,3 +13,13 @@ body{
   display: flex;
   flex-direction: column;
 }
+
+/* @media (max-width: 450px){
+  body{
+    overscroll-behavior: none;
+    margin: auto;
+    max-width: 450px;
+    width: 105vw;
+    min-width: 250px;
+  }
+} */

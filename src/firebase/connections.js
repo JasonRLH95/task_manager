@@ -1,5 +1,5 @@
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { getDocs,collection,addDoc, updateDoc, doc, orderBy, query, where, deleteDoc} from "firebase/firestore";
+import { getDocs,collection,addDoc, updateDoc, doc, orderBy, query, where, deleteDoc, getDoc, exists} from "firebase/firestore";
 import { firestore } from "./firebase.js";
 
 const auth = getAuth();
@@ -115,8 +115,6 @@ export const createTask = async (task) => {
     }
     try {
         const docRef = await addDoc(collection(firestore,"tasks"), task);
-        console.log("doc: "+docRef);
-        console.log("doc id: "+docRef.id);
         return docRef.id;
     } catch (error) {
         // console.error("Error adding tasks to Firestore:", error);
@@ -230,14 +228,29 @@ export const getHistory= async (uid)=>{
     }
 }
 
-export const absoluteErase = async(task)=>{
-    if (!task) {
-        throw new Error("Task is required to update a document.");
+export const absoluteErase = async(task, uid)=>{
+    if (!task || !uid) {
+        throw new Error("Task and userID is required to erase a document.");
     }
     try{
-        console.log(task.id);
-        const res = await deleteDoc(doc(firestore,"tasks",task.id));
-        console.log("results:\n"+res);
+        const docRef = doc(firestore,"tasks",task.id);
+        const docSnap = await getDoc(docRef);
+
+        if (!docSnap.exists()) {
+            console.error("Document does not exist.");
+            return;
+        }
+
+        const docData = {
+            id:docSnap.id,
+            ...docSnap.data()
+        };
+        if (docData.userID !== uid) {
+            console.error("Unauthorized: User ID does not match, You can't erase this task!");
+            return;
+        }
+        
+        await deleteDoc(docRef);
         return {msg:"ok"};
     }
     catch(error){

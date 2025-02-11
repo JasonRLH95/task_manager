@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import '../style/taskHistory.css';
 import { absoluteErase } from '../firebase/connections';
 
-export default function TaskHistory({ task, setFlag, flag }) {
+export default function TaskHistory({ task, setFlag, flag, currentUser, setSearchTerm }) {
 
   const [detailsFlag,setDetailsFlag] = useState(false);
     
   const eraseTask=()=>{
-    absoluteErase(task)
+    absoluteErase(task, currentUser)
     .then(data =>{
       if(data.msg === "ok"){
+        setSearchTerm("");
         setFlag(!flag);
       }
     })

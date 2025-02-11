@@ -40,7 +40,7 @@ export default function History({ loading, setLoading, flag, setFlag, tasks, set
   // --------------------------------------
   const mapTasksList=(list)=>{
     return list.map((task, inx)=>{
-      return <TaskHistory key={`historyTask_${inx}`} task={task} tasks={tasks} inx={inx} setFlag={setFlag} flag={flag}/>
+      return <TaskHistory key={`historyTask_${inx}`} task={task} setFlag={setFlag} flag={flag} currentUser={currentUser} setSearchTerm={setSearchTerm}/>
     })
   }
   const deployTasks = ()=>{

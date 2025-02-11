@@ -1,0 +1,25 @@
+.taskManager_component{
+    position: relative;
+    min-width: 720px;
+}
+.taskManager_logoutBtn{
+    position: absolute;
+    top: calc(150px + 30vh + 40px);
+    left: 20px;
+    width: 100px;
+    height: 40px;
+    color: white;
+    z-index: 1000;
+    font-size: 21px;
+    background-color: red;
+    border: 1px solid black;
+    text-shadow: 2px 2px 4px black;
+    cursor: pointer;
+    font-weight: bold;
+}
+.taskManager_logoutBtn:hover{
+    background-color: white;
+    border: 1px solid red;
+    color: red;
+    text-shadow: none;
+}

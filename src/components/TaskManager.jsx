@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import "../style/taskManager.css";
 import Signin from './Signin';
 import Signup from './Signup';
 import Home from './Home';
@@ -27,7 +28,7 @@ export default function TaskManager() {
         }
     }
     return (
-    <div>
+    <div className='taskManager_component'>
         {checkConnection()}
     </div>
     )

@@ -1,5 +1,5 @@
 import React,{ useState } from 'react';
-import "../style/taskManager.css";
+import "../style/home.css";
 import Navbar from './Navbar';
 import DisplayPage from './DisplayPage';
 import News from './News';
