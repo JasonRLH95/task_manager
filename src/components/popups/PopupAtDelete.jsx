@@ -1,5 +1,5 @@
 import React from 'react';
-import "../style/popupAtDelete.css";
+import "../../style/popupAtDelete.css";
 
 export default function PopupAtDelete({ setSelectedTask, setDeleteFlag, popupPosition, setDeleted }) {
   return (
@@ -9,8 +9,8 @@ export default function PopupAtDelete({ setSelectedTask, setDeleteFlag, popupPos
         <h4>You could see that task at history page</h4>
         <div>
           {/* if proceed - render the useEffect of the Task components */}
-          <button onClick={()=>{setDeleteFlag(false); setDeleted(true);}}>Yes</button>
-          <button onClick={()=>{setDeleteFlag(false); setDeleted(false); setSelectedTask(null)}}>No</button>
+          <button id='popup_delete_yes' onClick={()=>{setDeleteFlag(false); setDeleted(true);}}>Yes</button>
+          <button id='popup_delete_no' onClick={()=>{setDeleteFlag(false); setDeleted(false); setSelectedTask(null)}}>No</button>
         </div>
     </div>
   )

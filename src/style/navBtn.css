@@ -12,6 +12,8 @@
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     transition: font-size 0.2s ease;
+    background-color: var(--navbar-card-color);
+    color: var(--sub-bg-color);
 }
 .navBtn:nth-child(2),.navBtn_active:nth-child(2){
     border-left: 2px solid black;
@@ -20,6 +22,7 @@
 .navBtn:hover{
     color: rgba(50,50,210,1);
     font-size: 60px;
+    color: var(--bg-color);
 }
 .navBtn_active{
     height: 125px;
@@ -29,27 +32,21 @@
     font-size: 44px;
     font-weight: bold;
     border: none;
-    border-bottom: 2px solid white;
     border-top: 2px solid black;
     cursor: pointer;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
+    background-color: var(--sub-bg-color);
+    color: var(--navbar-card-color);
+    cursor:default;
 }
 
-@media(max-width:880px){
+@media(max-width:900px){
     .navBtn,.navBtn_active{
         font-size: 34px;
+        height: 100px;
     }
     .navBtn:hover{
         font-size: 42px;
     }
 }
-/* @media(max-width:450px){
-    .navBtn,.navBtn_active{
-        height: 75px;
-        font-size: 26px;
-    }
-    .navBtn:hover{
-        font-size: 29px;
-    }
-} */

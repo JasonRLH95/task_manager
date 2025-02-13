@@ -1,8 +1,8 @@
 import React,{ useEffect, useState } from 'react';
-import '../style/history.css';
-import TaskHistory from './TaskHistory';
-import { getHistory } from '../firebase/connections';
-import Loading from './Loading';
+import '../../style/history.css';
+import TaskHistory from '../history_page/TaskHistory';
+import { getHistory } from '../../firebase/connections';
+import Loading from '../global_components/Loading';
 
 export default function History({ loading, setLoading, flag, setFlag, tasks, setTasks, currentUser }) {
 

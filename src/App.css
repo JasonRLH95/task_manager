@@ -4,22 +4,65 @@
   font-weight: normal;
   font-style: normal;
 }
+:root { /* light mode */
+  --bg-color: white;
+  --light-text-color: rgba(50,50,210,0.6);
+  --navbar-card-color: rgba(50,50,210,0.9);
+  --navbar-text-color: rgba(50,50,210,0.9);
+  --history-task-bg-color: rgb(190,20,20);
+  --history-task-shadow-color: black;
+  --history-task-color: white;
+  --popup-bg-color: #C5C6C7;
+  --popup-text-color: rgba(50,50,210,0.9);
+  --popup-shadow-color: grey;
+  
+  --bg-oposite-color: black;
+  --sub-bg-color: lightgrey;
+  --light-bg-color: #C5C6C7;
+  --text-color: rgb(50,50,210);
+}
+
+.dark-mode { /* Dark Mode */
+  --bg-color: #0B0C10;
+  --light-text-color: #45A29E;
+  --navbar-card-color: #C5C6C7;
+  --history-task-bg-color: #45A29E;
+  --history-task-shadow-color: lightgrey;
+  --history-task-color: #1F2833;
+  --popup-bg-color: #1F2833;
+  --popup-text-color: #66FCF1;
+  --popup-shadow-color: #0B0C10;
+  
+  --bg-oposite-color: white;
+  --sub-bg-color: #1F2833;
+  --light-bg-color: #C5C6C7;
+  --text-color: #66FCF1;
+}
+
+html{
+  scroll-behavior: smooth;
+}
 body{
   min-width: 720px;
   overscroll-behavior: none;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: 0.3s;
 }
 .App {
   text-align: center;
   display: flex;
   flex-direction: column;
 }
-
-/* @media (max-width: 450px){
+.darkMode_switch{
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: fit-content;
+  cursor: pointer;
+}
+@media (max-width: 450px){
   body{
-    overscroll-behavior: none;
-    margin: auto;
-    max-width: 450px;
-    width: 105vw;
     min-width: 250px;
   }
-} */
+}

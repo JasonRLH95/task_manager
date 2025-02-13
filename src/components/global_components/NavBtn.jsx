@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import '../style/navBtn.css';
+import '../../style/navBtn.css';
 
 export default function NavBtn({ inx, button, display, setDisplay }) {
 

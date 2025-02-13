@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { updateTask } from '../firebase/connections';
-import "../style/popupAtEdit.css";
+import { updateTask } from '../../firebase/connections';
+import "../../style/popupAtEdit.css";
 
-export default function PopupAtEdit({ setSelectedTask, setEditFlag, popupPosition, setCurrentTask, task, flag, setFlag }) {
+export default function PopupAtEdit({ setSelectedTask, setEditFlag, popupPosition, setCurrentTask, task, flag, setFlag, currentUser }) {
     const [subject,setSubject] = useState(task.subject);
     const [task_owner,setTaskOwner] = useState(task.task_owner);
     const [task_desc,setTaskDesc] = useState(task.task_desc);
@@ -21,6 +21,7 @@ export default function PopupAtEdit({ setSelectedTask, setEditFlag, popupPositio
             task_status:task.task_status,
             taskCreatedAt: task.taskCreatedAt,
             taskUpdatedAt: new Date(),
+            userID:currentUser,
         }
         // -----------
         // make validations first before send to firestore
@@ -67,10 +68,13 @@ export default function PopupAtEdit({ setSelectedTask, setEditFlag, popupPositio
     }
   return (
     <div className='popupAtEdit_component' style={{top:`${popupPosition}px`}}>
-        <input type='text' placeholder='Subject' onChange={(e)=>{setSubject(e.target.value)}}/>
-        <input type='text' placeholder='Description' onChange={(e)=>{setTaskDesc(e.target.value)}}/>
-        <input type='text' placeholder='Owner' onChange={(e)=>{setTaskOwner(e.target.value)}}/>
-        <input type='date' placeholder='experition date' onChange={(e)=>{setTaskExpDate(e.target.value)}}/>
+        <div className="XbtnDiv">
+          <button className='popupAtEdit_Xbtn' onClick={()=>{setEditFlag(false);}}>X</button>
+        </div>
+        <input className='popupAtEdit_input' type='text' placeholder='Subject' onChange={(e)=>{setSubject(e.target.value)}}/>
+        <input className='popupAtEdit_input' type='text' placeholder='Description' onChange={(e)=>{setTaskDesc(e.target.value)}}/>
+        <input className='popupAtEdit_input' type='text' placeholder='Owner' onChange={(e)=>{setTaskOwner(e.target.value)}}/>
+        <input className='popupAtEdit_input' type='date' placeholder='experition date' onChange={(e)=>{setTaskExpDate(e.target.value)}}/>
         <button className="saveEditBtn" onClick={()=>{saveEdit()}}>Save</button>
     </div>
   )

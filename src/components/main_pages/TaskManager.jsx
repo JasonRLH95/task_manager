@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import "../style/taskManager.css";
+import "../../style/taskManager.css";
 import Signin from './Signin';
 import Signup from './Signup';
 import Home from './Home';
 
-export default function TaskManager() {
-    const [connected,setConncted] = useState(false);// => connection flag
+export default function TaskManager({ darkMode,changeDarkMode, switchDivRef, switchCircleRef, switchSwitchRef, connected, setConncted, currentUser, setCurrentUser, tasks, setTasks, handleLogout, renderDMSVisibility }) {
     const [signUp,setSignUp] = useState(false);// => signin/signup display flag
-    const [tasks,setTasks] = useState(null);// => user's tasks array according to userID
-    const [currentUser,setCurrentUser] = useState(null);//=> when sign in, catch the userID
+
     
     // ---------------------------
     // render display on the
@@ -16,7 +14,7 @@ export default function TaskManager() {
     // ---------------------------
     const checkConnection=()=>{
         if(connected){
-            return <Home tasks={tasks} setTasks={setTasks} currentUser={currentUser} setCurrentUser={setCurrentUser} setConncted={setConncted}/>
+            return <Home darkMode={darkMode} changeDarkMode={changeDarkMode} switchDivRef={switchDivRef} switchCircleRef={switchCircleRef} switchSwitchRef={switchSwitchRef} tasks={tasks} setTasks={setTasks} currentUser={currentUser} handleLogout={handleLogout} connected={connected} renderDMSVisibility={renderDMSVisibility}/>
         }
         else{
             if(signUp){

@@ -7,18 +7,22 @@
     letter-spacing: 5px;
 }
 .signin_container{
-    width: 400px;
-    height: 300px;
+    min-width: 400px;
+    min-height: 300px;
+    width: 40VW;
+    height: 35vh;
     border: 1px solid black;
     padding: 50px 20px 20px;
     margin: 50px auto 5px;
+    background-color: var(--sub-bg-color);
+    border-radius: 25px;
 }
 .signin_inputsDiv{
     display: flex;
     margin: auto;
     flex-direction: column;
-    width: 80%;
-    height: 80%;
+    width: 70%;
+    height: 70%;
 }
 .signin_input{
     width: 100%;
@@ -26,6 +30,7 @@
     margin: 10px auto 20px;
     font-size: 21px;
     text-indent: 10px;
+    border-radius: 15px;
 }
 #signin_password{
     position: relative;
@@ -34,21 +39,20 @@
     width: 100px;
     height: 40px;
     border: 1px solid black;
-    color: white;
-    text-shadow: 2px 2px 4px black;
     font-weight: bold;
     font-size: 18px;
-    background-color: rgb(5, 207, 5);
+    background-color: var(--text-color);
+    color: var(--sub-bg-color);
     cursor: pointer;
 }
 .signin_button:hover{
-    background-color: white;
-    border: 1px solid rgb(5, 207, 5);
-    color: rgb(5, 207, 5);
+    background-color: var(--sub-bg-color);
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
     text-shadow: none;
 }
 .signin_signupBtn{
-    color: blue;
+    color: var(--light-text-color);
     background-color: transparent;
     border: none;
     text-decoration: none;
@@ -58,23 +62,5 @@
     padding: none;
 }
 .signin_signupBtn:hover{
-    color: purple;
+    color: var(--text-color);
 }
-
-/* @media (max-width:450px) {
-    .signin_header{
-        font-size: 80px;
-    }
-    .signin_container{
-        width: 250px;
-        border-radius: 20px;
-    }
-    .signin_inputsDiv{
-        justify-content: space-evenly;
-    }
-    .signin_input{
-        margin: 0;
-        border: 1px solid black;
-        font-size: 19px;
-    }
-} */

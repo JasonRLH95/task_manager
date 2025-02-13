@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import "../style/signin.css";
-import { findUser } from '../firebase/connections';
+import "../../style/signin.css";
+import { findUser } from '../../firebase/connections';
 
 export default function Signin({ setConncted, setSignUp, setTasks, setCurrentUser }) {
     const [loginEmail,setLoginEmail] = useState("");
@@ -21,8 +21,9 @@ export default function Signin({ setConncted, setSignUp, setTasks, setCurrentUse
         try{
             findUser(loginEmail, loginPassword)
             .then(data=>{
+                localStorage.setItem("currentUser", JSON.stringify(data));
                 setTasks(data.tasks);
-                setCurrentUser(data.id);
+                setCurrentUser(data.userID);
                 setConncted(true);
             })
             .catch(error=>{

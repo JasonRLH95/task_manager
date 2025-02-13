@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { getTasks } from '../firebase/connections';
-import '../style/allTasks.css'
+import { getTasks } from '../../firebase/connections';
+import '../../style/allTasks.css'
 import Task from './Task';
-import PopupAtClose from './PopupAtClose';
-import Loading from './Loading';
-import PopupAtEdit from './PopupAtEdit';
-import PopupAtDelete from './PopupAtDelete';
+import PopupAtClose from '../popups/PopupAtClose';
+import Loading from '../global_components/Loading';
+import PopupAtEdit from '../popups/PopupAtEdit';
+import PopupAtDelete from '../popups/PopupAtDelete';
 
-export default function AllTasks({ loading, setLoading, flag, setFlag, tasks, setTasks, currentUser }) {
+export default function AllTasks({ darkMode, loading, setLoading, flag, setFlag, tasks, setTasks, currentUser, connected, renderDMSVisibility }) {
   
   const [selectedTask,setSelectedTask] = useState(null); // => catch the task index selected when change urgency || close || delete
   const [currentTask, setCurrentTask] = useState(null); // => catch the task selected for the edit, holds the current task information
@@ -26,6 +26,7 @@ export default function AllTasks({ loading, setLoading, flag, setFlag, tasks, se
   // so we could deploy Task component forEach doc
   // --------------------------------------
   useEffect(()=>{
+    renderDMSVisibility();
     const fetchData=()=>{
         setTasks([]);
         setLoading(true);
@@ -46,7 +47,7 @@ export default function AllTasks({ loading, setLoading, flag, setFlag, tasks, se
         }
     }
     fetchData();
-  },[flag, filter])
+  },[flag, filter, connected])
 
 
   // --------------------------------------
@@ -54,7 +55,7 @@ export default function AllTasks({ loading, setLoading, flag, setFlag, tasks, se
   // --------------------------------------
   const mapTasksList=(list)=>{
     return list.map((task, inx) =>{
-      return <Task key={`task_${task.id}`} flag={flag} setFlag={setFlag} selectedTask={selectedTask} setSelectedTask={setSelectedTask} task={task} tasks={list} inx={inx} setCloseFlag={setCloseFlag} setEditFlag={setEditFlag} setDeleteFlag={setDeleteFlag} deleted={deleted} setDeleted={setDeleted} doneFlag={doneFlag} setDoneFlag={setDoneFlag} setPopupPosition={setPopupPosition} setCurrentTask={setCurrentTask}/>
+      return <Task key={`task_${task.id}`} darkMode={darkMode} flag={flag} setFlag={setFlag} selectedTask={selectedTask} setSelectedTask={setSelectedTask} task={task} tasks={list} inx={inx} setCloseFlag={setCloseFlag} setEditFlag={setEditFlag} setDeleteFlag={setDeleteFlag} deleted={deleted} setDeleted={setDeleted} doneFlag={doneFlag} setDoneFlag={setDoneFlag} setPopupPosition={setPopupPosition} setCurrentTask={setCurrentTask}/>
     })
   }
   const deployTasks = ()=>{
@@ -84,7 +85,7 @@ export default function AllTasks({ loading, setLoading, flag, setFlag, tasks, se
             <input type="text" placeholder='Search...' className='allTasks_searchInput' onChange={(e)=>{setSearchTerm(e.target.value)}}/>
           </div>
           <div className='allTasks_filter'>
-            <label>Filter by: </label>
+            <label style={{cursor:"text"}}>Order by: </label>
             <select className='allTasks_select' defaultValue={"Choose filter"} onChange={(e)=>{setFilter(e.target.value);setFlag(!flag)}}>
               <option value="Choose filter" disabled hidden>Choose filter</option>
               <option value="Closed">Closed</option>
@@ -99,7 +100,7 @@ export default function AllTasks({ loading, setLoading, flag, setFlag, tasks, se
         </div>
       </>}
       {closeFlag && <PopupAtClose setSelectedTask={setSelectedTask} setCloseFlag={setCloseFlag} setDoneFlag={setDoneFlag} popupPosition={popupPosition}/>}
-      {editFlag && <PopupAtEdit setSelectedTask={setSelectedTask} setEditFlag={setEditFlag} popupPosition={popupPosition} setCurrentTask={setCurrentTask} task={currentTask} flag={flag} setFlag={setFlag}/>}
+      {editFlag && <PopupAtEdit setSelectedTask={setSelectedTask} setEditFlag={setEditFlag} popupPosition={popupPosition} setCurrentTask={setCurrentTask} task={currentTask} flag={flag} setFlag={setFlag} currentUser={currentUser}/>}
       {deleteFlag && <PopupAtDelete setSelectedTask={setSelectedTask} setDeleteFlag={setDeleteFlag} popupPosition={popupPosition} setDeleted={setDeleted}/>}
     </div>
   )

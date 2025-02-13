@@ -1,8 +1,8 @@
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { getDocs,collection,addDoc, updateDoc, doc, orderBy, query, where, deleteDoc, getDoc, exists} from "firebase/firestore";
+import { getDocs,collection,addDoc, updateDoc, doc, orderBy, query, where, deleteDoc, getDoc } from "firebase/firestore";
 import { firestore } from "./firebase.js";
 
-const auth = getAuth();
+export const auth = getAuth();
 
 // ---------------------------------------------------------------------------------------------
 // users collection
@@ -17,17 +17,16 @@ export const findUser = async (email, password)=>{
         throw new Error("User is required to search a document.");
     }
     try{
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const userRef = userCredential.user;
-        const id = userRef.uid;
-        const tasksQuery = query(collection(firestore, "tasks"), where("userID", "==", id));
+        const userCredential = await signInWithEmailAndPassword( auth, email, password );
+        const userID = userCredential.user.uid;
+        const tasksQuery = query(collection(firestore, "tasks"), where("userID", "==", userID));
         const querySnapshot = await getDocs(tasksQuery);
         const tasks = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         const res = {
-            id,
+            userID,
             tasks
         }
-        return res;
+        return res ? res : null;
     }
     catch (error) {
         console.error("Error fetching tasks from Firestore:", error);
@@ -236,7 +235,7 @@ export const absoluteErase = async(task, uid)=>{
         const docRef = doc(firestore,"tasks",task.id);
         const docSnap = await getDoc(docRef);
 
-        if (!docSnap.exists()) {
+        if (!docSnap) {
             console.error("Document does not exist.");
             return;
         }

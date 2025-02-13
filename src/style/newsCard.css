@@ -6,6 +6,7 @@
     justify-content: center;
     position: relative;
     cursor: pointer;
+    font-size: 18px;
 }
 .newsCard_link{
     position: absolute;
@@ -24,12 +25,12 @@
 .newsCard_mainContent{
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 70%;
     height: 100%;
 }
 .newsCard_title, .newsCard_desc{
     width: 80%;
-    margin: auto;
 }
 .newsCard_sourceImage{
     width: 50px;
@@ -38,4 +39,14 @@
     top: 20px;
     right: 20px;
     z-index: 1000;
+}
+@media (max-width:900px) {
+    .newsCard_component{
+        font-size: 14px;
+    }
+}
+@media (max-width:600px) {
+    .newsCard_component{
+        font-size: 11px;
+    }
 }

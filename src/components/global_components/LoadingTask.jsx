@@ -1,5 +1,5 @@
 import React from 'react';
-import '../style/loadingTask.css';
+import '../../style/loadingTask.css';
 
 export default function LoadingTask() {
   // -------------------------------

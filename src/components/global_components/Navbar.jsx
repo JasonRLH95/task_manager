@@ -1,5 +1,5 @@
 import React from 'react';
-import '../style/navbar.css';
+import '../../style/navbar.css';
 import NavBtn from './NavBtn';
 
 export default function Navbar({ display, setDisplay }) {

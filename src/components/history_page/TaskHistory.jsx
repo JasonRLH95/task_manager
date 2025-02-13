@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import '../style/taskHistory.css';
-import { absoluteErase } from '../firebase/connections';
+import '../../style/taskHistory.css';
+import { absoluteErase } from '../../firebase/connections';
 
 export default function TaskHistory({ task, setFlag, flag, currentUser, setSearchTerm }) {
 
   const [detailsFlag,setDetailsFlag] = useState(false);
-    
+  
+  
+  // ------------------------------
+  // erase the task from the database
+  // ------------------------------
   const eraseTask=()=>{
     absoluteErase(task, currentUser)
     .then(data =>{

@@ -48,37 +48,6 @@
     filter:brightness(0);
 }
 
-.task_status{
-    width: 20%;
-    height: 230px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.task_status_switch_div{
-    width: 50px;
-    height: 20px;
-    padding: 3px;
-    border: 1px solid grey;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    background-color: white;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-.task_status_switch_circle{
-    border-radius: 50%;
-    transition: translate 0.2s ease;
-}
-.task_status_switch_switch{
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: lightgrey;
-    transition: background-color 0.2s ease;
-}
 .task_subject{
     width: 60%;
     height: 100%;
@@ -89,49 +58,7 @@
     font-weight: bold;
     cursor: pointer;
 }
-.task_mainDetails{
-    width: 20%;
-    height: 190px;
-    padding: 20px 0;
-    border-right: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-}
-.task_mainDetails_urgencyDiv{
-    width: 80%;
-    height: 30px;
-    border: 0.5px solid black;
-    position: relative;
-}
-.urgencySelection{
-    width: 100%;
-    height: 91.5px;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 30px;
-}
-.urgency_selectOption{
-    width: 100%;
-    height: 30px;
-    cursor: pointer;
-    border-bottom: 0.5px solid black;
-}
-#urgency_selectLow{
-    background-color: green;
-}
-#urgency_selectMedium{
-    background-color: orange;
-}
-#urgency_selectHigh{
-    background-color: red;
-}
-.task_mainDetails_h4{
-    margin: 0;
-    font-weight: normal;
-}
+
 .task_description_dropDown{
     min-height: 100px;
     width: 80%;

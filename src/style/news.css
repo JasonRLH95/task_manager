@@ -1,7 +1,15 @@
 .newsDisplay{
     width: 100%;
-    height: 30vh;
+    height: 25vh;
+    color: var(--bg-oposite-color);
 }
-/* @media (max-width:450px) {
-
-} */
+@media (max-width:900px) {
+    .newsDisplay{
+        height: 20vh;
+    }
+}
+@media (max-width:600px) {
+    .newsDisplay{
+        height: 15vh;
+    }
+}

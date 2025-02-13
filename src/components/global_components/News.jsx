@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import NewsCard from './NewsCard';
-import '../style/news.css';
+import '../../style/news.css';
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export default function News() {
@@ -15,6 +15,9 @@ export default function News() {
         }
     },[newsIndex])
     
+    // ------------------------------
+    // fetch the news api
+    // ------------------------------
     const fetchNews=()=>{
         fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY}&q=israel&country=il&language=he&category=top`)
         .then(res => res.json())
@@ -27,6 +30,9 @@ export default function News() {
         })
     }
     
+    // ------------------------------
+    // swaping between the articles
+    // ------------------------------
     const renderNews =()=>{
         setTimeout(() => {
             if(newsIndex < newsArr.length-1 && newsIndex != null){
@@ -37,6 +43,11 @@ export default function News() {
             }    
         }, 5000);
     }
+    
+    // ------------------------------
+    // display the news card component
+    // with the relevant data
+    // ------------------------------
     const displayNews =()=>{
         if(newsArr !== null && newsIndex !== null){
             return <NewsCard card={newsArr[newsIndex]}/>

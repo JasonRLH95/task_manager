@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import "../style/signup.css";
-import { addUser } from '../firebase/connections';
+import "../../style/signup.css";
+import { addUser } from '../../firebase/connections';
 
 export default function Signup({ setSignUp }) {
   const [signEmail,setSignEmail] = useState("");

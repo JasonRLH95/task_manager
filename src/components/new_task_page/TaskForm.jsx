@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import '../style/taskForm.css';
-import { createTask } from '../firebase/connections.js';
+import '../../style/taskForm.css';
+import { createTask } from '../../firebase/connections.js';
 
 export default function TaskForm({ currentUser }) {
     const [subject,setSubject] = useState("");

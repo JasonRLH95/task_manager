@@ -1,5 +1,5 @@
 import React from 'react';
-import '../style/popupAtClose.css';
+import '../../style/popupAtClose.css';
 
 export default function PopupAtClose({ setSelectedTask, setCloseFlag, setDoneFlag, popupPosition }) {
   // -------------------------------
@@ -13,8 +13,8 @@ export default function PopupAtClose({ setSelectedTask, setCloseFlag, setDoneFla
         <h4>You won't be able to edit this task anymore</h4>
         <div>
           {/* if proceed - render the useEffect of the Task components */}
-          <button onClick={()=>{setCloseFlag(false); setDoneFlag(true)}}>Yes</button>
-          <button onClick={()=>{setCloseFlag(false); setDoneFlag(false); setSelectedTask(null)}}>No</button>
+          <button id='popup_close_yes' onClick={()=>{setCloseFlag(false); setDoneFlag(true)}}>Yes</button>
+          <button id='popup_close_no' onClick={()=>{setCloseFlag(false); setDoneFlag(false); setSelectedTask(null)}}>No</button>
         </div>
       </div>
   )

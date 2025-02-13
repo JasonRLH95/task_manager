@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import "../style/displayPage.css";
-import TaskForm from './TaskForm';
-import AllTasks from "./AllTasks";
-import History from "./History";
+import "../../style/displayPage.css";
+import TaskForm from '../new_task_page/TaskForm';
+import AllTasks from "../all_tasks_page/AllTasks";
+import History from "../history_page/History";
+import Switch from '../global_components/Switch';
 
-export default function DisplayPage({ display, tasks, setTasks, currentUser }) {
+export default function DisplayPage({ darkMode,changeDarkMode, switchDivRef, switchCircleRef, switchSwitchRef, display, tasks, setTasks, currentUser, connected, renderDMSVisibility, handleLogout }) {
 
     
     const [loading,setLoading] = useState(true);
@@ -33,9 +34,10 @@ export default function DisplayPage({ display, tasks, setTasks, currentUser }) {
     // ------------------------------------
     const renderPage=()=>{
         if(display === 0){
-            return <AllTasks loading={loading} setLoading={setLoading} flag={fetchAllFlag} setFlag={setFetchAllFlag} tasks={tasks} setTasks={setTasks} currentUser={currentUser}/>
+            return <AllTasks darkMode={darkMode} loading={loading} setLoading={setLoading} flag={fetchAllFlag} setFlag={setFetchAllFlag} tasks={tasks} setTasks={setTasks} currentUser={currentUser} connected={connected} renderDMSVisibility={renderDMSVisibility}/>
         }
         if(display === 1){
+            window.scrollBy({ top: 500, behavior: "smooth" });
             return <TaskForm currentUser={currentUser}/>
         }
         if(display === 2){
@@ -44,6 +46,12 @@ export default function DisplayPage({ display, tasks, setTasks, currentUser }) {
     }
 
   return (
-    <div className='displayPage_component' style={{minHeight:"90vh"}}>{renderPage()}</div>
+    <div className='displayPage_component' style={{minHeight:"90vh"}}>
+        {connected && <div className="connected_darkMode_switch">
+                  <Switch moveSwitch={changeDarkMode} switchDivRef={switchDivRef} switchCircleRef={switchCircleRef} switchSwitchRef={switchSwitchRef}/>
+                </div>}
+        <button className='taskManager_logoutBtn' onClick={()=>{handleLogout()}}>Logout</button>
+        {renderPage()}
+    </div>
   )
 }

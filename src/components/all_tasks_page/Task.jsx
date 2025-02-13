@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
-import '../style/task.css';
-import { closeTask, changeUrgency, deleteTask } from '../firebase/connections';
+import '../../style/task.css';
+import { closeTask, changeUrgency, deleteTask } from '../../firebase/connections';
+import Switch from '../global_components/Switch';
+import TaskDetails from './TaskDetails';
 
-export default function Task({ flag, setFlag, selectedTask, setSelectedTask, task, tasks, inx, setCloseFlag, setEditFlag, setDeleteFlag, deleted, setDeleted, doneFlag, setDoneFlag, setPopupPosition, setCurrentTask }) {
+export default function Task({ darkMode, flag, setFlag, selectedTask, setSelectedTask, task, tasks, inx, setCloseFlag, setEditFlag, setDeleteFlag, deleted, setDeleted, doneFlag, setDoneFlag, setPopupPosition, setCurrentTask }) {
 
   const [switchFlag,setSwitchFlag] = useState(false);// => flag to move the done switch
   const [detailsFlag,setDetailsFlag] = useState(false);// => flag to show/hide task details
@@ -35,7 +37,7 @@ export default function Task({ flag, setFlag, selectedTask, setSelectedTask, tas
     if(task.task_status === "open"){
       renderUrgencyVisibility(urgency);// => after change urgency, change the visibility of the urgencyDiv of the task according to value selected
     }
-  },[doneFlag, tasks, urgency, deleted])
+  },[doneFlag, tasks, urgency, deleted, darkMode])
   
   
   
@@ -48,31 +50,61 @@ export default function Task({ flag, setFlag, selectedTask, setSelectedTask, tas
       if(!switchDivRef || !switchCircleRef || !switchSwitchRef || !taskCompRef || !statusRef || !urgencyRef || !editRef){
         return;
       }
-      if((inx === selectedTask && switchFlag) || (task.task_status === "closed")){
-        switchDivRef.current.style.backgroundColor = "rgb(210,20,20)";
-        switchDivRef.current.style.opacity = "20%";
-        switchCircleRef.current.style.translate = "30px";
-        switchSwitchRef.current.style.backgroundColor = "lightgrey";
-        taskCompRef.current.style.backgroundColor = "lightgrey";
-        taskCompRef.current.style.color = "black";
-        subjectRef.current.style.textShadow = "5px 5px 5px grey";
-        detailsRef.current.style.textShadow = "3px 3px 3px grey";
-        statusRef.current.innerHTML = "closed";
-        urgencyRef.current.style.display = "none";
-        editRef.current.style.display = "none";
-        return;
+      if(!darkMode){
+        if((inx === selectedTask && switchFlag) || (task.task_status === "closed")){
+          switchDivRef.current.style.backgroundColor = "rgb(210,20,20)";
+          switchDivRef.current.style.opacity = "20%";
+          switchCircleRef.current.style.translate = "30px";
+          switchSwitchRef.current.style.backgroundColor = "lightgrey";
+          taskCompRef.current.style.backgroundColor = "lightgrey";
+          taskCompRef.current.style.color = "black";
+          subjectRef.current.style.textShadow = "5px 5px 5px grey";
+          detailsRef.current.style.textShadow = "3px 3px 3px grey";
+          statusRef.current.innerHTML = "closed";
+          urgencyRef.current.style.display = "none";
+          editRef.current.style.display = "none";
+          return;
+        }
+        else if(!switchFlag && task.task_status === "open"){
+          switchDivRef.current.style.backgroundColor = "rgb(19, 230, 19)";
+          switchDivRef.current.style.opacity = "100%";
+          switchCircleRef.current.style.translate = "0px";
+          switchSwitchRef.current.style.backgroundColor = "white";
+          taskCompRef.current.style.backgroundColor = "rgba(20,20,210,0.7)";
+          taskCompRef.current.style.color = "white";
+          subjectRef.current.style.textShadow = "5px 5px 5px black";
+          detailsRef.current.style.textShadow = "3px 3px 3px black";
+          statusRef.current.innerHTML = "open";
+          return;
+        }
       }
-      else if(!switchFlag && task.task_status === "open"){
-        switchDivRef.current.style.backgroundColor = "rgb(19, 230, 19)";
-        switchDivRef.current.style.opacity = "100%";
-        switchCircleRef.current.style.translate = "0px";
-        switchSwitchRef.current.style.backgroundColor = "white";
-        taskCompRef.current.style.backgroundColor = "rgba(20,20,210,0.7)";
-        taskCompRef.current.style.color = "white";
-        subjectRef.current.style.textShadow = "5px 5px 5px black";
-        detailsRef.current.style.textShadow = "3px 3px 3px black";
-        statusRef.current.innerHTML = "open";
-        return;
+      if(darkMode){
+        if((inx === selectedTask && switchFlag) || (task.task_status === "closed")){
+          switchDivRef.current.style.backgroundColor = "rgb(210,20,20)";
+          switchDivRef.current.style.opacity = "20%";
+          switchCircleRef.current.style.translate = "30px";
+          switchSwitchRef.current.style.backgroundColor = "lightgrey";
+          taskCompRef.current.style.backgroundColor = "#C5C6C7";
+          taskCompRef.current.style.color = "#1F2833";
+          subjectRef.current.style.textShadow = "5px 5px 5px grey";
+          detailsRef.current.style.textShadow = "3px 3px 3px grey";
+          statusRef.current.innerHTML = "closed";
+          urgencyRef.current.style.display = "none";
+          editRef.current.style.display = "none";
+          return;
+        }
+        else if(!switchFlag && task.task_status === "open"){
+          switchDivRef.current.style.backgroundColor = "rgb(19, 230, 19)";
+          switchDivRef.current.style.opacity = "100%";
+          switchCircleRef.current.style.translate = "0px";
+          switchSwitchRef.current.style.backgroundColor = "white";
+          taskCompRef.current.style.backgroundColor = "#1F2833";
+          taskCompRef.current.style.color = "#45A29E";
+          subjectRef.current.style.textShadow = "5px 5px 5px black";
+          detailsRef.current.style.textShadow = "3px 3px 3px black";
+          statusRef.current.innerHTML = "open";
+          return;
+        }
       }
     }
     // --------------------------------------
@@ -169,20 +201,20 @@ export default function Task({ flag, setFlag, selectedTask, setSelectedTask, tas
       return;
     }
     setCloseFlag(true);// return the makeSure-popup =>(at allTasks.jsx)
-    const popupPos = document.scrollingElement.scrollTop+(window.innerHeight*0.5)-125;
+    const popupPos = document.scrollingElement.scrollTop+(window.innerHeight*0.5)-175;
     setPopupPosition(popupPos);
     setSelectedTask(inx);// catch that selected task 
   }
   const openEditPopup = ()=>{
     setEditFlag(true);
-    const popupPos = document.scrollingElement.scrollTop+(window.innerHeight*0.5)-200;
+    const popupPos = document.scrollingElement.scrollTop+(window.innerHeight*0.5)-175;
     setPopupPosition(popupPos);
     setSelectedTask(inx);
     setCurrentTask(task);
   }
   const openDeletePopup=()=>{
     setDeleteFlag(true);
-    const popupPos = document.scrollingElement.scrollTop+(window.innerHeight*0.5)-125;
+    const popupPos = document.scrollingElement.scrollTop+(window.innerHeight*0.5)-175;
     setPopupPosition(popupPos);
     setSelectedTask(inx);  
   }
@@ -192,32 +224,11 @@ export default function Task({ flag, setFlag, selectedTask, setSelectedTask, tas
         <div className='task_container'>
           <div ref={editRef} className="task_editBtn" onClick={()=>{openEditPopup()}}></div>
           <div ref={deleteRef} className="task_deleteBtn" onClick={()=>{openDeletePopup()}}></div>
-          <div className='task_status'>
-            <div ref={switchDivRef} className='task_status_switch_div' onClick={()=>{openClosePopup()}}>
-              <div ref={switchCircleRef} className='task_status_switch_circle'>
-                <div ref={switchSwitchRef} className="task_status_switch_switch"></div>
-              </div>
-            </div>
-          </div>
+          <Switch moveSwitch={openClosePopup} switchDivRef={switchDivRef} switchCircleRef={switchCircleRef} switchSwitchRef={switchSwitchRef}/>
           <div ref={subjectRef} className='task_subject' onClick={()=>{setDetailsFlag(!detailsFlag)}}>
             {task.subject}
           </div>
-          <div ref={detailsRef} className="task_mainDetails">
-            <div className="task_mainDetails_urgencyDiv" ref={urgencyRef} onClick={()=>{
-                setUrgencyFlag(!urgencyFlag);
-                setSelectedTask(inx);
-            }}>
-              {urgencyFlag && 
-                <div className="urgencySelection">
-                  <div className="urgency_selectOption" id='urgency_selectLow' onClick={()=>{setUrgency("Low")}}></div>  
-                  <div className="urgency_selectOption" id='urgency_selectMedium' onClick={()=>{setUrgency("Medium")}}></div>  
-                  <div className="urgency_selectOption" id='urgency_selectHigh' onClick={()=>{setUrgency("High")}}></div>  
-                </div>}
-            </div>
-            <h4 className='task_mainDetails_h4'><b>Submission Date:<br/></b> {task.task_exp_date}</h4>
-            <h4 className='task_mainDetails_h4'><b>for:<br/></b> {task.task_owner}</h4>
-            <h4 className='task_mainDetails_h4'><b>status: </b><span ref={statusRef}></span></h4>
-          </div>
+          <TaskDetails detailsRef={detailsRef} urgencyRef={urgencyRef} setUrgencyFlag={setUrgencyFlag} urgencyFlag={urgencyFlag} setSelectedTask={setSelectedTask} setUrgency={setUrgency} inx={inx} task={task} statusRef={statusRef}/>
         </div>
         {detailsFlag && <div className="task_description_dropDown">
           {task.task_desc}

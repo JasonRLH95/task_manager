@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import '../style/loading.css';
+import '../../style/loading.css';
 import LoadingTask from './LoadingTask';
 
 export default function Loading({ loading, tasks }) {
