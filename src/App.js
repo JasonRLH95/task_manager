@@ -16,7 +16,6 @@ function App() {
   });//=> when sign in, catch the userID
   const [tasks,setTasks] = useState(() => {
     const tasksArr = localStorage.getItem("tasks");
-    console.log(tasksArr);
     return tasksArr ? JSON.parse(tasksArr) : [];
   });// => user's tasks array according to userID
   
@@ -36,7 +35,6 @@ function App() {
   // ------------------------
   useLayoutEffect(()=>{
     const storedUser = JSON.parse(localStorage.getItem("currentUser"));
-    console.log(storedUser);
     if (storedUser && storedUser.userID) {
       // Verify Firebase authentication session
       onAuthStateChanged(auth, (user) => {
@@ -80,6 +78,7 @@ function App() {
       localStorage.removeItem("currentUser");
     } catch (error) {
       console.error("Logout failed:", error);
+      return alert("Something wen't wrong while trying to logout\nPlease try again later");
     }
   };
 
