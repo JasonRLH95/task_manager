@@ -6,9 +6,19 @@ import TaskManager from './components/main_pages/TaskManager';
 import Switch from "./components/global_components/Switch";
 
 function App() {
-  const [connected,setConncted] = useState(false);// => connection flag
-  const [currentUser,setCurrentUser] = useState(null);//=> when sign in, catch the userID
-  const [tasks,setTasks] = useState(null);// => user's tasks array according to userID
+  const [connected,setConncted] = useState(() => {
+    const connection = localStorage.getItem("connected");
+    return connection ? JSON.parse(connection) : false;
+  });// => connection flag
+  const [currentUser,setCurrentUser] = useState(() => {
+    const current = localStorage.getItem("currentUser");
+    return current ? JSON.parse(current) : null;
+  });//=> when sign in, catch the userID
+  const [tasks,setTasks] = useState(() => {
+    const tasksArr = localStorage.getItem("tasks");
+    console.log(tasksArr);
+    return tasksArr ? JSON.parse(tasksArr) : [];
+  });// => user's tasks array according to userID
   
 
   const [darkMode, setDarkMode] = useState(
@@ -26,6 +36,7 @@ function App() {
   // ------------------------
   useLayoutEffect(()=>{
     const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+    console.log(storedUser);
     if (storedUser && storedUser.userID) {
       // Verify Firebase authentication session
       onAuthStateChanged(auth, (user) => {
@@ -44,7 +55,16 @@ function App() {
     if(darkMode !== null && darkMode !== undefined){
       return renderDMSVisibility();// => change the dark mode switch visibility
     }
-  }, [darkMode,connected]);
+  }, [darkMode]);
+  useEffect(()=>{
+    localStorage.setItem("connected", JSON.stringify(connected));
+  },[connected])
+  useEffect(()=>{
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  },[currentUser])
+  useEffect(()=>{
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  },[tasks])
   
 // --------------------------
 // handle the logout to make sure

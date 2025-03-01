@@ -201,20 +201,20 @@ export default function Task({ darkMode, flag, setFlag, selectedTask, setSelecte
       return;
     }
     setCloseFlag(true);// return the makeSure-popup =>(at allTasks.jsx)
-    const popupPos = document.scrollingElement.scrollTop+(window.innerHeight*0.5)-175;
+    const popupPos = document.scrollingElement.scrollTop+(window.innerHeight*0.25)-325;
     setPopupPosition(popupPos);
     setSelectedTask(inx);// catch that selected task 
   }
   const openEditPopup = ()=>{
     setEditFlag(true);
-    const popupPos = document.scrollingElement.scrollTop+(window.innerHeight*0.5)-175;
+    const popupPos = document.scrollingElement.scrollTop+(window.innerHeight*0.25)-325;
     setPopupPosition(popupPos);
     setSelectedTask(inx);
     setCurrentTask(task);
   }
   const openDeletePopup=()=>{
     setDeleteFlag(true);
-    const popupPos = document.scrollingElement.scrollTop+(window.innerHeight*0.5)-175;
+    const popupPos = document.scrollingElement.scrollTop+(window.innerHeight*0.25)-325;
     setPopupPosition(popupPos);
     setSelectedTask(inx);  
   }

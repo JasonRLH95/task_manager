@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../../style/taskForm.css';
 import { createTask } from '../../firebase/connections.js';
 
@@ -15,6 +15,10 @@ export default function TaskForm({ currentUser }) {
     const descRef = useRef();
     const expDateRef = useRef();
     
+    useEffect(()=>{
+        var today = new Date().toISOString().split('T')[0];
+        expDateRef.current.setAttribute('min', today);
+    },[])
 
     // ----------------------------------
     // on submit the form, this function try to create new task and add
@@ -89,7 +93,7 @@ export default function TaskForm({ currentUser }) {
             <input ref={ownerRef} type="text" className="taskForm_input" placeholder='Task for...' onChange={(e)=>{setTaskOwner(e.target.value)}}/>
             <textarea ref={descRef} id='textarea' className="taskForm_input" placeholder='Task description...' onChange={(e)=>{setTaskDesc(e.target.value)}}></textarea>
             <div className="form_date_urgency_div">
-                <input ref={expDateRef} type="date" className="taskForm_input" placeholder='Date to acomplish...' onChange={(e)=>{setTaskExpDate(e.target.value)}}/>
+                <input ref={expDateRef} type="date" id='taskForm_date' className="taskForm_input" placeholder='Date to acomplish...' onChange={(e)=>{setTaskExpDate(e.target.value)}}/>
                 <select ref={urgencyRef} className='taskForm_select' defaultValue={"Urgency"} onChange={(e)=>{setUrgency(e.target.value)}}>
                     <option value="Urgency" hidden disabled>Urgency</option>
                     <option value="Low">Low</option>
