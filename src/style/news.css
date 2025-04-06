@@ -2,14 +2,10 @@
     width: 100%;
     height: 25vh;
     color: var(--bg-oposite-color);
+    overflow: hidden;
 }
-@media (max-width:900px) {
+@media (max-width:700px) {
     .newsDisplay{
-        height: 20vh;
-    }
-}
-@media (max-width:600px) {
-    .newsDisplay{
-        height: 15vh;
+        height: 17vh;
     }
 }

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import "../../style/displayPage.css";
 import TaskForm from '../new_task_page/TaskForm';
-import AllTasks from "../all_tasks_page/AllTasks";
+// import AllTasks from "../all_tasks_page/AllTasks";
+import AllTasks from "../allTasksPage_copy/AllTasks";
 import History from "../history_page/History";
 import Switch from '../global_components/Switch';
 

@@ -1,8 +1,6 @@
 .navBtn{
     height: 125px;
     width: 33.333%;
-    background-color: rgba(50,50,210,0.6);
-    color: white;
     font-size: 44px;
     font-weight: bold;
     border: none;
@@ -20,15 +18,12 @@
     border-right: 2px solid black;
 }
 .navBtn:hover{
-    color: rgba(50,50,210,1);
     font-size: 60px;
     color: var(--bg-color);
 }
 .navBtn_active{
     height: 125px;
     width: 33.333%;
-    background-color: white;
-    color: rgba(50,50,210,0.6);
     font-size: 44px;
     font-weight: bold;
     border: none;
@@ -41,7 +36,7 @@
     cursor:default;
 }
 
-@media(max-width:900px){
+@media(max-width:700px){
     .navBtn,.navBtn_active{
         font-size: 34px;
         height: 100px;
